@@ -290,9 +290,9 @@ export const birthdayData: BirthdayContentConfig = {
   // =========================================================================
   music: {
     enabled: true,
-    title: 'Warm Music Box Melodies',
-    artist: 'A Little More of You (Placeholder)',
-    audioSrc: '/audio/background.mp3',
+    title: 'Tenerife Sea',
+    artist: 'Ed Sheeran',
+    audioSrc: '/audio/background-1.mp3',
     loop: true,
   },
   voiceNote: {

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { BirthdayContentConfig } from '@/types/birthday';
 import { SectionHeading } from './SectionHeading';
 import { TimelineCard } from './TimelineCard';
@@ -12,8 +13,14 @@ interface JourneyTimelineProps {
 
 export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ content }) => {
   return (
-    <section
+    <motion.section
       id="journey"
+      onViewportEnter={() => {
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('play-background-music'));
+        }
+      }}
+      viewport={{ amount: 0.1 }}
       className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24"
     >
       <SectionHeading
@@ -45,6 +52,6 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ content }) => 
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

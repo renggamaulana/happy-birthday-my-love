@@ -4,7 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MemoryItem } from '@/types/birthday';
-import { WashiTape } from './PaperDecorations';
+import {
+  WashiTape,
+  PaperClip,
+  SparkleDoodle,
+  HandwrittenArrow,
+  DoodleHeart,
+} from './PaperDecorations';
 
 interface TimelineCardProps {
   memory: MemoryItem;
@@ -27,7 +33,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
 
   return (
     <div
-      className={`relative flex flex-col md:flex-row items-center w-full mb-12 sm:mb-16 last:mb-0 ${
+      className={`relative flex flex-col md:flex-row items-center w-full mb-14 sm:mb-20 last:mb-0 ${
         isEven ? 'md:flex-row-reverse' : ''
       }`}
     >
@@ -50,11 +56,22 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
           style={{ transform: `rotate(${rotation}deg)` }}
           className="relative group transition-transform duration-300 hover:rotate-0 hover:scale-[1.02] max-w-[320px] sm:max-w-[360px] w-full"
         >
+          {/* Paperclip on selected cards */}
+          {index % 2 === 0 ? (
+            <div className="absolute -top-4 right-6 z-20">
+              <PaperClip color="brass" />
+            </div>
+          ) : (
+            <div className="absolute -top-4 left-6 z-20">
+              <PaperClip color="rose" />
+            </div>
+          )}
+
           {/* Decorative washi tape at top */}
-          <div className="absolute -top-3 left-8 w-20 z-10">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 z-10">
             <WashiTape
-              variant={index % 2 === 0 ? 'linen' : 'rose'}
-              angle={index % 2 === 0 ? -2 : 1.5}
+              variant={index % 2 === 0 ? 'linen' : 'pattern'}
+              angle={index % 2 === 0 ? -1.5 : 2}
             />
           </div>
 
@@ -80,6 +97,11 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
               </span>
             </div>
           </div>
+
+          {/* Tiny Sparkle Doodle on corner */}
+          <div className="absolute -bottom-2 -left-3 pointer-events-none opacity-60">
+            <SparkleDoodle size={16} />
+          </div>
         </div>
       </motion.div>
 
@@ -100,10 +122,10 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
         whileInView={{ opacity: 1, x: 0, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full md:w-[46%] px-2 sm:px-6"
+        className="w-full md:w-[46%] px-2 sm:px-6 relative"
       >
         <div
-          className={`bg-[#FCF8F0]/90 backdrop-blur-xs p-5 sm:p-6 rounded-xl border border-[#D6C0A9] scrapbook-card-shadow relative ${
+          className={`bg-[#FCF8F0]/95 backdrop-blur-xs p-5 sm:p-6 rounded-xl border border-[#D6C0A9] scrapbook-card-shadow relative ${
             isEven ? 'md:text-right' : 'md:text-left'
           } text-center`}
         >
@@ -135,6 +157,18 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
             <span>♡</span>
           </div>
         </div>
+
+        {/* Hand-drawn arrow annotation on desktop */}
+        {index === 1 && (
+          <div className="hidden lg:block absolute -bottom-8 left-8 rotate-[8deg]">
+            <HandwrittenArrow text="still gives me butterflies ✨" direction="right" />
+          </div>
+        )}
+        {index === 3 && (
+          <div className="hidden lg:block absolute -bottom-8 right-8 rotate-[-6deg]">
+            <HandwrittenArrow text="my favorite laugh ♡" direction="left" />
+          </div>
+        )}
       </motion.div>
     </div>
   );

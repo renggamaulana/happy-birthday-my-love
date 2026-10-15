@@ -30,18 +30,40 @@ export const VoiceNotePlayer: React.FC<VoiceNotePlayerProps> = ({ config }) => {
       setCurrentTime(audio.currentTime);
     };
 
+    const onPlay = () => {
+      setIsPlaying(true);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('voicenote-play'));
+      }
+    };
+
+    const onPause = () => {
+      setIsPlaying(false);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('voicenote-stop'));
+      }
+    };
+
     const onEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('voicenote-stop'));
+      }
     };
 
     const onError = () => {
       setHasError(true);
       setIsPlaying(false);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('voicenote-stop'));
+      }
     };
 
     audio.addEventListener('loadedmetadata', onLoadedMetadata);
     audio.addEventListener('timeupdate', onTimeUpdate);
+    audio.addEventListener('play', onPlay);
+    audio.addEventListener('pause', onPause);
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('error', onError);
 
@@ -50,8 +72,13 @@ export const VoiceNotePlayer: React.FC<VoiceNotePlayerProps> = ({ config }) => {
 
     return () => {
       audio.pause();
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('voicenote-stop'));
+      }
       audio.removeEventListener('loadedmetadata', onLoadedMetadata);
       audio.removeEventListener('timeupdate', onTimeUpdate);
+      audio.removeEventListener('play', onPlay);
+      audio.removeEventListener('pause', onPause);
       audio.removeEventListener('ended', onEnded);
       audio.removeEventListener('error', onError);
       audioRef.current = null;

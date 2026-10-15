@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Mail, MailOpen, Sparkles, X } from 'lucide-react';
 import { LoveNoteItem } from '@/types/birthday';
 import { SectionHeading } from './SectionHeading';
-import { WashiTape } from './PaperDecorations';
+import {
+  WashiTape,
+  PaperClip,
+  SparkleDoodle,
+  BotanicalBranch,
+  DoodleHeart,
+} from './PaperDecorations';
 
 interface LoveNotesProps {
   notes: LoveNoteItem[];
@@ -33,6 +39,11 @@ export const LoveNotes: React.FC<LoveNotesProps> = ({
       id="love-notes"
       className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24"
     >
+      {/* Decorative botanical branch on left background */}
+      <div className="hidden lg:block absolute top-1/4 -left-12 pointer-events-none opacity-30 rotate-[-15deg]">
+        <BotanicalBranch size={100} />
+      </div>
+
       <SectionHeading
         tag="Chapter 02 • Reasons Why"
         title={title}
@@ -55,6 +66,18 @@ export const LoveNotes: React.FC<LoveNotesProps> = ({
               style={{ transform: `rotate(${rotationAngle}deg)` }}
               className="relative transition-transform duration-300 hover:rotate-0"
             >
+              {/* PaperClip on note 2 and 5 */}
+              {index === 1 && (
+                <div className="absolute -top-4 right-6 z-30">
+                  <PaperClip color="rose" />
+                </div>
+              )}
+              {index === 4 && (
+                <div className="absolute -top-4 left-6 z-30">
+                  <PaperClip color="brass" />
+                </div>
+              )}
+
               {/* Decorative tape on each note */}
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 z-20">
                 <WashiTape

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Sparkles, Heart, ArrowUp, Star } from 'lucide-react';
 import { BirthdayContentConfig } from '@/types/birthday';
-import { WaxSeal, WashiTape } from './PaperDecorations';
+import { WaxSeal, WashiTape, VintageStamp, SparkleDoodle } from './PaperDecorations';
 
 interface FinalSurpriseProps {
   content: BirthdayContentConfig;
@@ -82,6 +82,11 @@ export const FinalSurprise: React.FC<FinalSurpriseProps> = ({
                   }
                 }}
               >
+                {/* Vintage Stamp on top-right of envelope */}
+                <div className="absolute top-4 right-4 rotate-6 z-20">
+                  <VintageStamp theme="heart" label="SECRET" />
+                </div>
+
                 {/* Washi tape over envelope */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 z-20">
                   <WashiTape variant="rose" angle={-1} />
@@ -122,9 +127,12 @@ export const FinalSurprise: React.FC<FinalSurpriseProps> = ({
                   <WashiTape variant="coffee" angle={1} />
                 </div>
 
-                <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#464039] mb-4">
-                  {finalSurprise.letterTitle}
-                </h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#464039]">
+                    {finalSurprise.letterTitle}
+                  </h3>
+                  <SparkleDoodle size={18} className="opacity-70" />
+                </div>
 
                 <div className="space-y-4 font-sans text-sm sm:text-base text-[#464039] leading-relaxed">
                   {finalSurprise.paragraphs.map((para, i) => (

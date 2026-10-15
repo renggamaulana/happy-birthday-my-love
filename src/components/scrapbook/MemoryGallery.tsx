@@ -5,9 +5,15 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { GalleryItem } from '@/types/birthday';
 import { SectionHeading } from './SectionHeading';
-import { WashiTape } from './PaperDecorations';
+import {
+  WashiTape,
+  PhotoCorner,
+  PaperClip,
+  VintageStamp,
+  SparkleDoodle,
+} from './PaperDecorations';
 import { PhotoLightbox } from './PhotoLightbox';
-import { ZoomIn } from 'lucide-react';
+import { ZoomIn, Heart } from 'lucide-react';
 
 interface MemoryGalleryProps {
   items: GalleryItem[];
@@ -47,6 +53,15 @@ export const MemoryGallery: React.FC<MemoryGalleryProps> = ({
       id="gallery"
       className="relative w-full max-w-6xl mx-auto px-4 py-16 sm:py-24"
     >
+      {/* Decorative vintage stamps and sparkles in the corner */}
+      <div className="hidden md:block absolute top-12 right-12 rotate-[-8deg] pointer-events-none opacity-80">
+        <VintageStamp theme="love" label="MEMOIRE" />
+      </div>
+
+      <div className="absolute top-20 left-8 pointer-events-none opacity-40">
+        <SparkleDoodle size={24} />
+      </div>
+
       <SectionHeading
         tag="Chapter 04 • Snapshots"
         title={title}
@@ -100,13 +115,39 @@ export const MemoryGallery: React.FC<MemoryGalleryProps> = ({
                 </>
               )}
 
+              {/* Brass Paperclip on some photos */}
+              {index === 0 && (
+                <div className="absolute -top-5 right-4 z-20">
+                  <PaperClip color="brass" />
+                </div>
+              )}
+              {index === 4 && (
+                <div className="absolute -top-5 left-4 z-20">
+                  <PaperClip color="rose" />
+                </div>
+              )}
+
               {/* Tappable Polaroid Card */}
               <button
                 type="button"
                 onClick={() => handleOpenPhoto(index)}
-                className="w-full text-left bg-[#FCF8F0] p-3 pb-4 rounded-xs polaroid-shadow border border-[#D6C0A9] block cursor-pointer transition-shadow duration-300 group-hover:shadow-xl focus:outline-hidden focus:ring-2 focus:ring-[#8B514B]"
+                className="w-full text-left bg-[#FCF8F0] p-3 pb-4 rounded-xs polaroid-shadow border border-[#D6C0A9] block cursor-pointer transition-shadow duration-300 group-hover:shadow-xl focus:outline-hidden focus:ring-2 focus:ring-[#8B514B] relative overflow-hidden"
                 aria-label={`View photo: ${item.title}`}
               >
+                {/* Photo Corner tabs for authentic scrapbook feeling */}
+                {index === 2 && (
+                  <>
+                    <PhotoCorner position="bottom-left" />
+                    <PhotoCorner position="bottom-right" />
+                  </>
+                )}
+                {index === 6 && (
+                  <>
+                    <PhotoCorner position="bottom-left" />
+                    <PhotoCorner position="bottom-right" />
+                  </>
+                )}
+
                 <div
                   className={`relative ${aspectClass} w-full overflow-hidden rounded-[2px] bg-[#E7D7C3]/50`}
                 >

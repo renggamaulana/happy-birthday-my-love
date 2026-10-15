@@ -10,12 +10,13 @@ import { MemoryGallery } from '@/components/scrapbook/MemoryGallery';
 import { BirthdayCake } from '@/components/scrapbook/BirthdayCake';
 import { FinalSurprise } from '@/components/scrapbook/FinalSurprise';
 import { MusicPlayer } from '@/components/scrapbook/MusicPlayer';
+import { RomanticCursor } from '@/components/scrapbook/RomanticCursor';
 
 export default function BirthdayPage() {
   const scrollToJourney = () => {
     const journeyEl = document.getElementById('journey');
     if (journeyEl) {
-      journeyEl.scrollIntoView({ behavior: 'smooth' });
+      journeyEl.scrollIntoView({ behavior: 'smooth' }); 
     }
   };
 
@@ -32,6 +33,9 @@ export default function BirthdayPage() {
 
   return (
     <main className="relative min-h-screen w-full flex flex-col items-center bg-[#F7F0E5] text-[#464039] selection:bg-[#E7D7C3] selection:text-[#8B514B]">
+      {/* ROMANTIC INTERACTIVE CURSOR (DESKTOP) */}
+      <RomanticCursor />
+
       {/* SECTION 1 — THE LITTLE INVITATION */}
       <ScrapbookCover
         content={birthdayData}

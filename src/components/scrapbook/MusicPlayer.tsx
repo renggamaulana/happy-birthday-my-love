@@ -11,6 +11,8 @@ interface MusicPlayerProps {
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userPausedRef = useRef(false);
+  const wasPlayingBeforeVoiceRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -21,6 +23,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
 
     const audio = new Audio(config.audioSrc);
     audio.loop = config.loop;
+    audio.preload = 'auto';
     audioRef.current = audio;
 
     const onPlay = () => setIsPlaying(true);
@@ -36,8 +39,76 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('error', onError);
 
-    // Initial check without autoplaying
+    // Function to attempt playing audio
+    const attemptPlay = () => {
+      if (!audioRef.current || userPausedRef.current || wasPlayingBeforeVoiceRef.current) return;
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+          setHasError(false);
+          cleanupInteractionListeners();
+        })
+        .catch(() => {
+          // Autoplay was blocked by browser policy prior to user interaction.
+          // Listeners will keep retrying on user interactions (scroll, touch, click, etc.)
+        });
+    };
+
+    // Interaction triggers for browsers with strict autoplay policies
+    const handleInteraction = () => {
+      if (!userPausedRef.current && !wasPlayingBeforeVoiceRef.current) {
+        attemptPlay();
+      }
+    };
+
+    // Handlers for Voice Note coordination: pause bg music while voice note plays, resume when stopped
+    const handleVoiceNotePlay = () => {
+      if (audioRef.current && !audioRef.current.paused) {
+        wasPlayingBeforeVoiceRef.current = true;
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    const handleVoiceNoteStop = () => {
+      if (wasPlayingBeforeVoiceRef.current && audioRef.current && !userPausedRef.current) {
+        wasPlayingBeforeVoiceRef.current = false;
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            setHasError(false);
+          })
+          .catch(() => {});
+      }
+    };
+
+    const cleanupInteractionListeners = () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('touchmove', handleInteraction);
+      window.removeEventListener('pointerdown', handleInteraction);
+      window.removeEventListener('wheel', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('play-background-music', handleInteraction);
+    };
+
+    window.addEventListener('click', handleInteraction, { passive: true });
+    window.addEventListener('touchstart', handleInteraction, { passive: true });
+    window.addEventListener('touchmove', handleInteraction, { passive: true });
+    window.addEventListener('pointerdown', handleInteraction, { passive: true });
+    window.addEventListener('wheel', handleInteraction, { passive: true });
+    window.addEventListener('keydown', handleInteraction, { passive: true });
+    window.addEventListener('scroll', handleInteraction, { passive: true });
+    window.addEventListener('play-background-music', handleInteraction);
+    window.addEventListener('voicenote-play', handleVoiceNotePlay);
+    window.addEventListener('voicenote-stop', handleVoiceNoteStop);
+
+    // Initial immediate attempt to autoplay
     audio.load();
+    attemptPlay();
 
     return () => {
       audio.pause();
@@ -45,6 +116,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
       audio.removeEventListener('pause', onPause);
       audio.removeEventListener('ended', onEnded);
       audio.removeEventListener('error', onError);
+      window.removeEventListener('voicenote-play', handleVoiceNotePlay);
+      window.removeEventListener('voicenote-stop', handleVoiceNoteStop);
+      cleanupInteractionListeners();
       audioRef.current = null;
     };
   }, [config.audioSrc, config.loop, config.enabled]);
@@ -54,9 +128,13 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
   const togglePlay = () => {
     if (!audioRef.current || hasError) return;
 
+    wasPlayingBeforeVoiceRef.current = false;
+
     if (isPlaying) {
+      userPausedRef.current = true;
       audioRef.current.pause();
     } else {
+      userPausedRef.current = false;
       audioRef.current.play().catch(() => {
         setHasError(true);
       });
@@ -105,7 +183,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
                 <button
                   type="button"
                   onClick={toggleMute}
-                  className="text-[#85786B] hover:text-[#464039] p-1 ml-auto"
+                  className="text-[#85786B] hover:text-[#464039] p-1 ml-auto cursor-pointer"
                   aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
                 >
                   {isMuted ? (
