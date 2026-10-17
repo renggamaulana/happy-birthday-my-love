@@ -22,7 +22,7 @@ export const birthdayData: BirthdayContentConfig = {
     noteText: 'Made with love, just for you ♡',
     coverPhoto: {
       url: '/images/smile.jpg',
-      caption: 'Senyum tipis manis yang selalu bikin hariku adem ♡',
+      caption: 'Happy Birthday My Sweetest Girl ♡',
       dateLabel: 'Hari spesial buat orang tersayangku, Mala',
       rotation: -2,
     },
