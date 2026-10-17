@@ -175,8 +175,8 @@ export const birthdayData: BirthdayContentConfig = {
       'Dan semoga, di antara banyak hal baik yang kamu temukan tahun ini, kita masih diberi banyak waktu untuk membuat cerita baru bersama.',
       'Happy birthday, my favorite person. ♡',
     ],
-    signOff: 'With all my heart, yours,',
-    signature: 'Your Man',
+    signOff: 'With all my heart,',
+    signature: 'Your Man ♡',
     letterDate: 'Special Birthday Edition',
   },
 
@@ -202,7 +202,7 @@ export const birthdayData: BirthdayContentConfig = {
         title: 'Choco Mint Favorit Kamu',
         photoUrl: '/images/mala-chocolate-drink.jpg',
         caption:
-          'Muka adem kamu tiap megang minuman choco mint kesukaan kamu. Senyum manisnya nular banget, bikin kopi paitku terasa manis.',
+          'Muka senang kamu tiap megang choco mint kesukaan kamu. Senyum manisnya nular banget, bikin kopi paitku terasa manis.',
         rotation: 2.5,
         aspect: 'portrait',
         tapePosition: 'top-right',
