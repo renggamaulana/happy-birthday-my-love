@@ -26,7 +26,7 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ content }) => {
   return (
     <section
       id="love-letter"
-      className="relative w-full max-w-4xl mx-auto px-4 py-16 sm:py-24"
+      className="relative w-full max-w-4xl mx-auto px-4 py-16 sm:py-24 overflow-x-clip"
     >
       <SectionHeading
         tag="Chapter 03 • From My Heart"
@@ -52,7 +52,7 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ content }) => {
         </div>
 
         {/* Vintage Letter Paper */}
-        <article className="bg-[#FCF8F0] p-6 sm:p-10 md:p-12 rounded-sm border border-[#D6C0A9] scrapbook-card-shadow relative overflow-hidden rotate-[-0.5deg]">
+        <article className="bg-[#FCF8F0] p-5 sm:p-10 md:p-12 rounded-sm border border-[#D6C0A9] scrapbook-card-shadow relative overflow-hidden rotate-[-0.5deg]">
           {/* Coffee Ring Watermark on bottom left */}
           <div className="absolute -bottom-10 -left-10 pointer-events-none opacity-30">
             <CoffeeRingStain size={160} />

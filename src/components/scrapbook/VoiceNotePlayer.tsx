@@ -148,7 +148,7 @@ export const VoiceNotePlayer: React.FC<VoiceNotePlayerProps> = ({ config }) => {
             <p className="font-semibold text-[#8B514B]">Audio belum tersedia</p>
             <p className="mt-0.5">
               Letakkan file rekaman suara Anda di{' '}
-              <code className="text-[#464039] bg-[#E7D7C3]/60 px-1 py-0.5 rounded">
+              <code className="text-[#464039] bg-[#E7D7C3]/60 px-1 py-0.5 rounded break-all">
                 public/audio/birthday-voice.mp3
               </code>
             </p>

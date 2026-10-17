@@ -51,7 +51,7 @@ export const MemoryGallery: React.FC<MemoryGalleryProps> = ({
   return (
     <section
       id="gallery"
-      className="relative w-full max-w-6xl mx-auto px-4 py-16 sm:py-24"
+      className="relative w-full max-w-6xl mx-auto px-4 py-16 sm:py-24 overflow-x-clip"
     >
       {/* Decorative vintage stamps and sparkles in the corner */}
       <div className="hidden md:block absolute top-12 right-12 rotate-[-8deg] pointer-events-none opacity-80">
@@ -86,7 +86,7 @@ export const MemoryGallery: React.FC<MemoryGalleryProps> = ({
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
               style={{ transform: `rotate(${item.rotation}deg)` }}
-              className="relative transition-all duration-300 hover:rotate-0 hover:scale-[1.03] hover:z-20 group"
+              className="relative transition-all duration-300 hover:rotate-0 hover:scale-[1.03] hover:z-20 group max-w-[285px] xs:max-w-[340px] sm:max-w-none mx-auto w-full"
             >
               {/* Optional Tape on photo */}
               {item.tapePosition === 'top-center' && (

@@ -21,7 +21,7 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ content }) => 
         }
       }}
       viewport={{ amount: 0.1 }}
-      className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24"
+      className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24 overflow-x-clip"
     >
       <SectionHeading
         tag="Chapter 01 • Memory Lane"

@@ -150,7 +150,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
   return (
     <aside
       aria-label="Background music player"
-      className="fixed bottom-4 right-4 z-40 select-none"
+      className="fixed bottom-4 right-4 z-40 select-none max-w-[calc(100vw-32px)]"
     >
       <div className="flex items-center gap-2">
         {/* Expandable Track Information Card */}
@@ -160,7 +160,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ config }) => {
               initial={{ opacity: 0, x: 20, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 20, scale: 0.95 }}
-              className="bg-[#FCF8F0]/95 backdrop-blur-md border border-[#D6C0A9] px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2.5 max-w-[220px]"
+              className="bg-[#FCF8F0]/95 backdrop-blur-md border border-[#D6C0A9] px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2.5 max-w-[170px] xs:max-w-[210px] sm:max-w-[240px]"
             >
               <div className="w-7 h-7 rounded-full bg-[#E7D7C3] flex items-center justify-center shrink-0">
                 <Music

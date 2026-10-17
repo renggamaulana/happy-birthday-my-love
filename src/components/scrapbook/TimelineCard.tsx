@@ -54,7 +54,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
       >
         <div
           style={{ transform: `rotate(${rotation}deg)` }}
-          className="relative group transition-transform duration-300 hover:rotate-0 hover:scale-[1.02] max-w-[320px] sm:max-w-[360px] w-full"
+          className="relative group transition-transform duration-300 hover:rotate-0 hover:scale-[1.02] max-w-[275px] xs:max-w-[310px] sm:max-w-[360px] w-full"
         >
           {/* Paperclip on selected cards */}
           {index % 2 === 0 ? (
@@ -144,7 +144,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
             {memory.title}
           </h3>
 
-          <p className="text-sm sm:text-base text-[#85786B] font-sans leading-relaxed">
+          <p className="text-sm sm:text-base text-[#85786B] font-sans leading-relaxed break-words">
             {memory.caption}
           </p>
 

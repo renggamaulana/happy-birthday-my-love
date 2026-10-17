@@ -24,7 +24,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: 'A Little More of You — Romantic Birthday Scrapbook',
+  title: 'Happy Birthday, My Love ♡',
   description:
     'A handmade romantic digital scrapbook filled with Polaroid memories, love notes, and birthday surprises.',
 };

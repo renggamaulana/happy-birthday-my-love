@@ -71,7 +71,7 @@ export const FinalSurprise: React.FC<FinalSurpriseProps> = ({
                 exit={{ opacity: 0, scale: 0.95, y: -20 }}
                 transition={{ duration: 0.4 }}
                 onClick={() => setIsOpen(true)}
-                className="relative bg-[#FCF8F0] text-[#464039] p-8 sm:p-12 rounded-xl envelope-shadow border border-[#D6C0A9] cursor-pointer group select-none transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="relative bg-[#FCF8F0] text-[#464039] p-6 sm:p-12 rounded-xl envelope-shadow border border-[#D6C0A9] cursor-pointer group select-none transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 role="button"
                 tabIndex={0}
                 aria-label="Open the final surprise letter"

@@ -37,7 +37,7 @@ export const LoveNotes: React.FC<LoveNotesProps> = ({
   return (
     <section
       id="love-notes"
-      className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24"
+      className="relative w-full max-w-5xl mx-auto px-4 py-16 sm:py-24 overflow-x-clip"
     >
       {/* Decorative botanical branch on left background */}
       <div className="hidden lg:block absolute top-1/4 -left-12 pointer-events-none opacity-30 rotate-[-15deg]">

@@ -77,7 +77,7 @@ export const BirthdayCake: React.FC<BirthdayCakeProps> = ({
   return (
     <section
       id="make-a-wish"
-      className="relative w-full max-w-4xl mx-auto px-4 py-16 sm:py-24 flex flex-col items-center"
+      className="relative w-full max-w-4xl mx-auto px-4 py-16 sm:py-24 flex flex-col items-center overflow-x-clip"
     >
       <SectionHeading
         tag="Chapter 05 • Celebration"
@@ -91,7 +91,7 @@ export const BirthdayCake: React.FC<BirthdayCakeProps> = ({
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
-        className="relative bg-[#FCF8F0] p-6 sm:p-10 rounded-2xl border border-[#D6C0A9] scrapbook-card-shadow max-w-lg w-full flex flex-col items-center select-none"
+        className="relative bg-[#FCF8F0] p-5 sm:p-10 rounded-2xl border border-[#D6C0A9] scrapbook-card-shadow max-w-lg w-full flex flex-col items-center select-none"
       >
         {/* Top washi tape */}
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 z-10">
@@ -99,7 +99,7 @@ export const BirthdayCake: React.FC<BirthdayCakeProps> = ({
         </div>
 
         {/* Illustrated Interactive Cake SVG */}
-        <div className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-2">
+        <div className="relative w-56 h-56 xs:w-64 xs:h-64 sm:w-72 sm:h-72 flex items-center justify-center my-2">
           <svg
             viewBox="0 0 300 300"
             className="w-full h-full drop-shadow-md overflow-visible"

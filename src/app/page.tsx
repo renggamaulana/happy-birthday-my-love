@@ -32,7 +32,7 @@ export default function BirthdayPage() {
   };
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center bg-[#F7F0E5] text-[#464039] selection:bg-[#E7D7C3] selection:text-[#8B514B]">
+    <main className="relative min-h-screen w-full max-w-full overflow-x-clip flex flex-col items-center bg-[#F7F0E5] text-[#464039] selection:bg-[#E7D7C3] selection:text-[#8B514B]">
       {/* ROMANTIC INTERACTIVE CURSOR (DESKTOP) */}
       <RomanticCursor />
 
